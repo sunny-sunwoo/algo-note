@@ -15,6 +15,10 @@ public class TreeNode {
 		this.val = val;
 	}
 	
+	public String getStringVal() {
+		return String.valueOf(val);
+	}
+	
 	@Override
 	public String toString() {
 		if (this.left == null && this.right == null) {
