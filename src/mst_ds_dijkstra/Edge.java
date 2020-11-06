@@ -1,6 +1,6 @@
 package mst_ds_dijkstra;
 
-public class Edge {
+public class Edge implements Comparable<Edge>{
 	private final int a;
 	private final int b;
 	private final double weight;
@@ -27,6 +27,11 @@ public class Edge {
 			return a;
 		}
 		throw new IllegalArgumentException("illegal vertex");
+	}
+	
+	@Override
+	public int compareTo(Edge other) {
+		return Double.compare(this.weight, other.weight);
 	}
 	
 	@Override
