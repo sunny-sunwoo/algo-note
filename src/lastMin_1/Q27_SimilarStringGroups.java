@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class SimilarStringGroups {
+public class Q27_SimilarStringGroups {
 	public static int numSimilarGroups(String[] strs) {
         DisjointSet uf = new DisjointSet(strs.length);
         

@@ -23,7 +23,7 @@ import java.util.Set;
  * @author sunnypark
  *
  */
-public class MaxLenOfConcatStrWithUniqChars {
+public class Q17_MaxLenOfConcatStrWithUniqChars {
 	public static int maxLength(List<String> arr) {
         Set<String> res = new HashSet<>();
         res.add("");
