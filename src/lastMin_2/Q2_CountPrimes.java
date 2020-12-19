@@ -2,7 +2,7 @@ package lastMin_2;
 
 import java.util.Arrays;
 
-public class CountPrimes {
+public class Q2_CountPrimes {
 	public static int countPrimes(int n) {
         boolean[] nonPrimeChecker = new boolean[n];
         
