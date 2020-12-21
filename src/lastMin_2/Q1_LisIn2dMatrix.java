@@ -54,8 +54,7 @@ public class Q1_LisIn2dMatrix {
         for (int[] dir : DIRS) {
             int nextY = i + dir[0];
             int nextX = j + dir[1];
-            
-            if (!isValidRange(nextY, nextX, matrix) || !isLis(nextY, nextX, i, j, matrix)) {
+              || !isLis(nextY, nextX, i, j, matrix)) {
                 continue;
             }
             res = Math.max(res, getLis(cache, matrix, nextY, nextX) + 1);
