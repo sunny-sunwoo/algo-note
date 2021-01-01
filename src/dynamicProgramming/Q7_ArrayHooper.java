@@ -37,7 +37,7 @@ public class Q7_ArrayHooper {
 
 			// 2) if possible max needs update
 			// which means jump from curr index should be picked
-			if (i + arr[i] > possibleMax) {
+			if (possibleMax < i + arr[i]) {
 				possibleMax = i + arr[i];
 				possibleMaxIdx = i;
 			}
