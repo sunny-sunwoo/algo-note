@@ -1,6 +1,6 @@
-package mst_ds_dijkstra.disjointSet;
+package path.disjointSet;
 
-import mst_ds_dijkstra.DisjointSet;
+import path.DisjointSet;
 
 public class BridgeRecoverer {
 

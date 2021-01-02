@@ -20,9 +20,12 @@ public class T2_PrefixTrie {
 		Node curr = trie;
 		for (int i = 0; i < word.length(); i++) {
 			char c = word.charAt(i);
-			Node child = curr.children.getOrDefault(c, new Node(word.substring(0, i + 1)));
+			Node child = curr.children.get(c);
 			
-			curr = c
+			if (child == null) {
+				curr.children.put(c, new Node(word.substring(0, i + 1)));
+			}
+			
 			// check last char
 		}
 	}

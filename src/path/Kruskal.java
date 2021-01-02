@@ -1,4 +1,4 @@
-package mst_ds_dijkstra;
+package path;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.PriorityQueue;

@@ -1,4 +1,4 @@
-package mst_ds_dijkstra;
+package path;
 
 public class Edge implements Comparable<Edge>{
 	private final int a;

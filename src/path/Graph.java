@@ -1,4 +1,4 @@
-package mst_ds_dijkstra;
+package path;
 
 import java.util.List;
 

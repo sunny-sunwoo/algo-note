@@ -1,4 +1,4 @@
-package mst_ds_dijkstra;
+package path;
 
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
