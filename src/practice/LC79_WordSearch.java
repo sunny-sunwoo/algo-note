@@ -59,7 +59,7 @@ private static int[][] DIRS = new int[][] {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
     }
     
     public static void main(String[] args) {
-    	char[][] board = {{"A","B","C","E"},{"S","F","C","S"},{"A","D","E","E"}};
+    	char[][] board = {{'A','B', 'C', 'E'},{'S', 'F', 'C', 'S'},{'A', 'D', 'E', 'E'}};
     	String word = "ABCCED";
     	System.out.println(exist(board, word));
     }
