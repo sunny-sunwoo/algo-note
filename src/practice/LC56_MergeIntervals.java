@@ -29,7 +29,6 @@ import java.util.PriorityQueue;
 	
 	
 	(Note) think about Interval class implements Comparable<Interval>
-	
  * @author sunnypark
  *
  */
