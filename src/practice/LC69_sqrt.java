@@ -33,7 +33,7 @@ public class LC69_sqrt {
         int hi = x/2;
         
         while (lo <= hi) {
-            int mid = hi - (hi - lo) / 2;
+            int mid = lo + (hi - lo) / 2;
             long midPower = (long) mid * mid;
             
             if (midPower == x) {
