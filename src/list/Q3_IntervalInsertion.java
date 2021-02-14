@@ -35,7 +35,7 @@ import java.util.List;
  * @author sunnypark
  *
  */
-public class Q3_Interval {
+public class Q3_IntervalInsertion {
 	public static List<int[]> insertInterval(int[][] intervals, int[] newInterval) {
 		int s = newInterval[0];
 		int e = newInterval[1];
