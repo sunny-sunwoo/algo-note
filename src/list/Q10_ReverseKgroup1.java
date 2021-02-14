@@ -1,6 +1,6 @@
 package list;
 /**
- * Q10. reverse k group
+ * Q10. reverse k group (ver1)
  * 
  * e.g. 
  * input: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8, k = 3
