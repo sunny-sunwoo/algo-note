@@ -26,7 +26,6 @@ package practice;
 	while height[i] != max
 	    same logic. 
 
-
  * @author sunnypark
  *
  */
