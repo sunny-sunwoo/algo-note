@@ -1,4 +1,4 @@
-package practice;
+package leetcode;
 
 /**
  * LC238 ProductOfArrayExceptSelf

@@ -1,4 +1,4 @@
-package practice;
+package leetcode;
 /**
  * 
  * LC02 Add Two Numbers

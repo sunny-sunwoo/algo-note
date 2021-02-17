@@ -1,4 +1,4 @@
-package practice;
+package leetcode;
 
 public class LC727_MinimumWindowSubsequence {
 	public static String minWindow_dp(String S, String T) {

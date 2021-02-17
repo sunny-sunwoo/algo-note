@@ -1,4 +1,4 @@
-package practice;
+package leetcode;
 
 /**
  * LC 69 sqrt

@@ -1,4 +1,4 @@
-package practice;
+package leetcode;
 
 /**
  * lc42. trapping rain water

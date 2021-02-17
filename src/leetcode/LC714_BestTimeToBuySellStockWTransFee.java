@@ -1,4 +1,4 @@
-package practice;
+package leetcode;
 /**
  * LC714 stock selling with transaction fee
  * 

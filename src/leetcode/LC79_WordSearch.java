@@ -1,4 +1,4 @@
-package practice;
+package leetcode;
 
 /**
  * LC 79. Word Search
