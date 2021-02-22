@@ -12,16 +12,16 @@ import java.util.Arrays;
  * 
  * [solution] build dp table
  * dp[start][end] 
- * 	=> compressed string for string(start..end)
- *  => final result @ dp[0][string length - 1]
+ * => compressed string for string(start..end)
+ * => final result @ dp[0][string length - 1]
  * 
+ * [logic]
  * iter thru len (1 ~ sLen)
  *  => iter thru start (0 ~ sLen - len)
  *  => pick min length strings from:
  *  	1) substring (start .. len)
- *		2) combination of (start..m) + (m+1..len)
- *		3) new compressed str 
- *
+ *  	2) combination of (start..m) + (m+1..len)
+ *  	3) new compressed str
  *     
  * @author sunnypark
  *
