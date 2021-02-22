@@ -11,8 +11,8 @@ import java.util.Arrays;
  * Output: "2[aabc]d"
  * 
  * [solution] build dp table
- * dp[start][len] 
- * 	=> compressed string for string(start..len)
+ * dp[start][end] 
+ * 	=> compressed string for string(start..end)
  *  => final result @ dp[0][string length - 1]
  * 
  * iter thru len (1 ~ sLen)
@@ -31,74 +31,68 @@ public class Q42_StringCompressor {
 	public static String encodeString(String s) {
 		int sLen = s.length();
 		dp = init(sLen);
-		
+
 		for (int len = 1; len <= sLen; len++) {
-			for (int start = 0; start < sLen - len + 1; start++) {
-				int end = start + len;
+			for (int start = 0; start <= sLen - len; start++) {
+				int end = start + len - 1;
+
 				// 1) substring
-				dp[start][end] = s.substring(start, start + len);
-				printDp(dp);
-				
+				dp[start][end] = s.substring(start, end + 1);
+
 				// 2) combination of left, right 
-				for (int m = start; m < end; m++) {
+				for (int m = start + 1; m <= end - 1; m++) {
 					String left = dp[start][m];
-					String right = dp[m+1][end];
-					
-					if (left.length() == 0 || right.length() == 0) {
-						continue;
-					}
+					String right = dp[m + 1][end];
 					
 					if (left.length() + right.length() < dp[start][end].length()) {
 						dp[start][end] = left+right;
 					}
 				}
-				
-				printDp(dp);
-				
+
 				// 3) new compressed string
 				String newCompressed = compress(start, end, s);
-				System.out.println("NEW: " + start + " " + end + "  " +  newCompressed);
-				if (newCompressed.length() < dp[start][end].length()) {
+				if (newCompressed.length() <= dp[start][end].length()) {
 					dp[start][end] = newCompressed;
 				}
-				
 			}
 		}
-		return dp[0][sLen];
+
+		return dp[0][sLen - 1];
 	}
 	
 	private static String compress(int s, int e, String str) {
-		String curr = str.substring(s, e);
+		String curr = str.substring(s, e + 1);
 		int pos = curr.repeat(2).indexOf(curr, 1);
 		if (pos >= curr.length()) {
 			return curr;
 		}
-		
 		int repeatingNum = curr.length() / pos;
-		return String.valueOf(repeatingNum) + "[" + dp[s][s + pos] + "]";
+		return String.valueOf(repeatingNum) + "[" + dp[s][s + pos - 1] + "]";
 	}
 	
 	private static String[][] init(int len) {
-		String[][] dp = new String[len + 1][len + 1];
+		String[][] dp = new String[len][len];
 		for (String[] each : dp) {
 			Arrays.fill(each, "");
 		}
 		return dp;
 	}
 	
-	private static void printDp(String[][] dp) {
+	private static void print(String[][] dp) {
 		for (String[] each: dp) {
 			System.out.println(Arrays.toString(each));
 		}
-		System.out.println("-----");
 	}
 	
 	public static void main(String[] args) {
-		String s1 = "ababab";
-		System.out.println(encodeString(s1));
+		String s1 = "abbbabbbcabbbabbbc";
+		System.out.println(encodeString(s1)); // expected: 2[2[abbb]c]
 		
-		printDp(dp);
+		String s2 = "aabcaabcd";
+		System.out.println(encodeString(s2)); // expected: 2[aabc]d
+		
+		String s3 = "aaaaaaaaaa";
+		System.out.println(encodeString(s3)); // expected: 10[a]
+//		print(dp);
 	}
-	
-	
 }
