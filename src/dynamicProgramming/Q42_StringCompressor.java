@@ -22,7 +22,17 @@ import java.util.Arrays;
  *  	1) substring (start .. len)
  *  	2) combination of (start..m) + (m+1..len)
  *  	3) new compressed str
- *     
+ *  
+ * [time complexity]
+ * iter thru all lens (1 ~ string length)
+ * starting from all pos
+ *   => n^2
+ *   
+ * find answer from intermediate compressed strings 
+ *   => n (m can be all pos between s,e)
+ *   
+ * time complexity: n^3
+ * 
  * @author sunnypark
  *
  */
