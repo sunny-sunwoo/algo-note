@@ -29,10 +29,9 @@ public class Q4_PeekingIterator<E> implements Iterator<E> {
 
 	@Override
 	public boolean hasNext() {
-		if (peekedItem != null) {
+		if (hasPeeked) {
 			return true;
 		}
-		
 		return iterator.hasNext();
 	}
 
