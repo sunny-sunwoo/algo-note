@@ -4,16 +4,16 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class Q4_PeekingIterator implements Iterator<Integer> {
-	Iterator<Integer> iterator;
+public class Q4_PeekingIterator<E> implements Iterator<E> {
+	Iterator<? extends E> iterator;
 	boolean hasPeeked;
-	Integer peekedItem;
+	E peekedItem;
 
-	public Q4_PeekingIterator(List<Integer> input) {
+	public Q4_PeekingIterator(List<? extends E> input) {
 		iterator = input.iterator();
 	}
 	
-	public Integer peek() {
+	public E peek() {
 		if (hasPeeked) {
 			return peekedItem;
 		}
@@ -29,7 +29,7 @@ public class Q4_PeekingIterator implements Iterator<Integer> {
 
 	@Override
 	public boolean hasNext() {
-		if (hasPeeked) {
+		if (peekedItem != null) {
 			return true;
 		}
 		
@@ -37,24 +37,23 @@ public class Q4_PeekingIterator implements Iterator<Integer> {
 	}
 
 	@Override
-	public Integer next() {
+	public E next() {
 		if (!hasPeeked) {
-			throw new NoSuchElementException();
+			if (!iterator.hasNext()) {
+				throw new NoSuchElementException();
+			}
+			return iterator.next(); 
 		}
 		
-		if (hasPeeked) {
-			Integer next = peekedItem;
-			hasPeeked = false;
-			peekedItem = null;
-			return next;
-		}
-		
-		return iterator.next();
+		E next = peekedItem;
+		hasPeeked = false;
+		peekedItem = null;
+		return next;
 	}
 	
 	public static void main(String[] args) {
 		List<Integer> input = List.of(1,2,3);
-		Q4_PeekingIterator peekingIterator = new Q4_PeekingIterator(input);
+		Q4_PeekingIterator<Integer> peekingIterator = new Q4_PeekingIterator<Integer>(input);
 		
 		System.out.println(peekingIterator.peek()); // expected: 1
 		System.out.println(peekingIterator.hasNext()); // expected: true 
