@@ -59,7 +59,6 @@ public class ShoppingPatterns {
 		}
 		
 		int minScore = Integer.MAX_VALUE;
-		
 		for (Set<Integer> trio : trioList) {
 			int cnt = 0;
 			for (int currNode : trio) {
@@ -73,6 +72,7 @@ public class ShoppingPatterns {
 			}
 			minScore = Math.min(minScore, cnt);
 		}
+
 		return minScore;
 	}
 	
