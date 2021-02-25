@@ -47,7 +47,7 @@ import java.util.stream.Collectors;
  * @author sunnypark
  *
  */
-public class Shopping_Patterns {
+public class ShoppingPatterns {
 	public static Map<Integer, Set<Integer>> graph;
 	public static int getMinScore(int nodesNum, int edgesNum, int[] from, int[] to) {
 		init(nodesNum, edgesNum, from, to);
