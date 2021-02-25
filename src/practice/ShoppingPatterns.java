@@ -211,6 +211,7 @@ public class ShoppingPatterns {
         bufferedReader.close();
         System.out.println(getMinScore(products_nodes, products_edges, products_from, products_to)); // expected: 2
     
+        
 //		Map<Integer, Set<Integer>> adjList = new HashMap<>();
 //		adjList.put(1, new HashSet<Integer>() {{ add(2); add(3); }});
 //		adjList.put(2, new HashSet<Integer>() {{ add(1); add(3); add(4); }});

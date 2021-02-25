@@ -1,6 +1,10 @@
 package practice;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Memo {
 
@@ -19,6 +23,11 @@ public class Memo {
 		System.out.println(-12&12);
 
 		test(17);
+		
+		Map<Integer, List<Integer>> hm = new HashMap<>();
+		hm.computeIfAbsent(1, (unused) -> new ArrayList<>()).add(3);
+		hm.computeIfAbsent(1, (unused) -> new ArrayList<>()).add(4);
+		System.out.println(hm);
 	}
 
 }
