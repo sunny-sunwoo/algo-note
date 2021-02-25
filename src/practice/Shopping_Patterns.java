@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 /**
  * shopping patterns
+ * https://aonecode.com/amazon-online-assessment-shopping-patterns
  * 
  * 1 = 2,3
  * 2 = 1,3,4
