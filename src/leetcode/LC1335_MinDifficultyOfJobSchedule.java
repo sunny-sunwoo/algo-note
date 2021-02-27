@@ -150,7 +150,16 @@ public class LC1335_MinDifficultyOfJobSchedule {
      * dp[i][j] => answer with i numbers, j partitions
      *     			m = i; m >= j; m--
      *              min (dp[i][j], dp[m - 1][j - 1] + getMax(jobDifficulty, m, i))
+     *              
+     *  
+     *   [11,/111,/22/,222,/33,/333,44, 444 ], d = 6
+     *   
+     *  dp[n][k] <= min (dp[n][k], dp[X][k-1] + max(X+1, n))
+     *                              ^ 
+     *                   second last partition +  last partition
      *                             
+     *                       partition = 3 
+     *                       1, 2, / 3, 4, 5 
      * @param jobDifficulty
      * @param d
      * @return
