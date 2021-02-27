@@ -155,8 +155,8 @@ public class LC1335_MinDifficultyOfJobSchedule {
      * @param d
      * @return
      */
-    public int minDifficulty_dp(int[] jobDifficulty, int d) {
-        
-    }
+//    public int minDifficulty_dp(int[] jobDifficulty, int d) {
+//        
+//    }
     
 }
