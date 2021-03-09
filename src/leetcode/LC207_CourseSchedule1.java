@@ -72,7 +72,5 @@ public class LC207_CourseSchedule1 {
             adjList.get(from).add(to);
             indegree[to]++;
         }
-        
-        adjList.stream().mapToInt(i->i).sum()
     }
 }
