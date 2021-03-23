@@ -41,10 +41,46 @@ public class Q4_3_SerializeDeserializeTrie {
 		int openIdx = s.indexOf("{");
 		int closeIdx = s.lastIndexOf("}");
 		
+		// base case?
+		
 		String rootVal = s.substring(0, openIdx);
 		TrieNode root = new TrieNode(Integer.valueOf(rootVal));
-		return root;
 		
+		List<String> childString = parseInside(s.substring(openIdx + 1, closeIdx));
+		
+		System.out.println("LIST: " + childString);
+		
+		for (String next : childString) {
+			TrieNode child = deserialize(next);
+			root.children.add(child);
+		}
+		return root;
+	}
+	
+	private static List<String> parseInside(String input) {
+		List<String> res = new ArrayList<>();
+		int tracker = 0;
+		int left = 0;
+		for (int right = 0; right < input.length(); right++) {
+			char curr = input.charAt(right);
+			if (curr == '{') {
+				tracker++;
+			} else if (curr == '}') {
+				tracker--;
+				if (tracker == 0) {
+					int nextComma = right + 1;
+					res.add(input.substring(left, nextComma));
+					left = nextComma + 1;
+					tracker = 0;
+				}
+			}
+		}
+		
+		if (left < input.length()) {
+			res.add(input.substring(left, input.length()));
+		}
+
+		return res;
 	}
 	private static class TrieNode {
 		private static int id = 1;
@@ -92,8 +128,8 @@ public class Q4_3_SerializeDeserializeTrie {
 		t1.children.addAll(l1);
 		t2.children.addAll(l2);
 		
-		System.out.println(t1);
 		String query = t1.toString();
+		System.out.println("query: " + query);
 		TrieNode root = deserialize(query);
 		System.out.println(root);
 	}
