@@ -36,7 +36,7 @@ import java.util.List;
  * @author sunnypark
  *
  */
-public class Q4_3 {
+public class Q4_3_SerializeDeserializeTrie {
 	public static TrieNode deserialize(String s) {
 		int openIdx = s.indexOf("{");
 		int closeIdx = s.lastIndexOf("}");
@@ -92,6 +92,7 @@ public class Q4_3 {
 		t1.children.addAll(l1);
 		t2.children.addAll(l2);
 		
+		System.out.println(t1);
 		String query = t1.toString();
 		TrieNode root = deserialize(query);
 		System.out.println(root);

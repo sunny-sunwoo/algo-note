@@ -39,9 +39,33 @@ public class SmallestWindowContainingSubstr {
 		Map<Character, Integer> patternMap = buildMap(pattern);
 		Map<Character, Integer> foundMap = new HashMap<>();
 		int left = 0, right = 0;
+		int found = 0;
+		String smallestWindow = "";
+		int minLen = Integer.MAX_VALUE;
 		for (right = 0; right < str.length(); right++) {
-			
+			char currChar = str.charAt(right);
+			if (patternMap.containsKey(currChar)) {
+				foundMap.put(currChar, foundMap.getOrDefault(currChar, 0) + 1);
+				if (foundMap.get(currChar) == patternMap.get(currChar)) {
+					found++;
+				}
+				
+				while (found == patternMap.size()) {
+					if (right - left + 1 < minLen) {
+						smallestWindow = str.substring(left, right + 1);
+					}
+					char leftChar = str.charAt(left);
+					if (patternMap.containsKey(left)) {
+						foundMap.put(leftChar, foundMap.get(leftChar) - 1);
+						if (foundMap.get(leftChar) == 0) {
+							foundMap.remove(leftChar, 0);
+							found--;
+						}
+					}
+					left++;
+				}
+			}
 		}
-		return "";
+		return smallestWindow;
 	}
 }
