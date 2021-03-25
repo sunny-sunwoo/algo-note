@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /**
  * Json Parsing
- * string -> Map<String, Object>
+ * string -> Map<Object, Object>
  *  find pair {----}
  *  find key 
  *  find value
@@ -20,9 +20,15 @@ import java.util.Arrays;
  *    
  *    
  * "key" : "value"
- * "key" : {...}
- * "key" : [{"key" : "value"}]
+ * "key" : {"key" : "value"}
+ * "key" : [{"key" : "value"}, {"key" : "value"}, {"key" : "value"}]
+ * {"status":"ok", "status_message":"Query was successful", "data":[{"movie_count":28778, "limit":10, "page_number":1}, {"movie_count":28778, "limit":10, "page_number":1}]}
  * 
+ * "status":"ok"
+ * "status_message":"Query was successful"
+ * "data": List<Map> 
+ * 
+ * { "key1":"value1", "key2":"{"key1":"value1"}" }
  * @author sunnypark
  *
  */
