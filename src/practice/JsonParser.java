@@ -47,16 +47,16 @@ public class JsonParser {
 		}
 		stack.addLast('{');
 		i++;
-		
+
 		while (i < input.length() && input.charAt(i) != '}') {
 			if (!validateJsonString(input)) {
 				return false;
 			}
-			
+
 			if (input.charAt(i++) != ':') {
 				return false;
 			}
-			
+
 			if (!validateJsonValue(input)) {
 				return false;
 			}
@@ -70,7 +70,7 @@ public class JsonParser {
 		stack.removeLast();
 		return stack.isEmpty() ? true : false;
 	}
-	
+
 	private static boolean validateJsonString(String s) {
 		if (s.charAt(i++) != '\"') {
 			return false;
@@ -83,38 +83,38 @@ public class JsonParser {
 		}
 		return true;
 	}
-	
+
 	private static boolean validateJsonValue(String s) {
 		// case1: string
 		if(s.charAt(i) == '\"') {
 			return validateJsonString(s);
 		}
-		
-		// case2: object
-        if(s.charAt(i) == '{') {
-        	return isValidJson(s); // recursive call
-        }
-        
-        // case3: array of object
-        if(s.charAt(i) == '[') {
-            i++;
 
-            while(true) {
-                if(!validateJsonValue(s)) { // recursive call
-                	return false;
-                }
-                if(s.charAt(i) == ',') {
-                	i++;
-                }
-                else {
-                	break;
-                }
-            }
-            if(s.charAt(i) == ']') {
-            	return true;
-            }
-        }
-        return false;
+		// case2: object
+		if(s.charAt(i) == '{') {
+			return isValidJson(s); // recursive call
+		}
+
+		// case3: array of object
+		if(s.charAt(i) == '[') {
+			i++;
+
+			while(true) {
+				if(!validateJsonValue(s)) { // recursive call
+					return false;
+				}
+				if(s.charAt(i) == ',') {
+					i++;
+				}
+				else {
+					break;
+				}
+			}
+			if(s.charAt(i) == ']') {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public static void main(String[] args) {
