@@ -23,7 +23,7 @@ import java.util.Stack;
  *      => [{obj1}, {obj2}, ...]
  *      => for each object, recursive call
  *    
- *    
+ *    Map<String, Object>
  * "key" : "value"
  * "key" : {"key" : "value"}
  * "key" : [{"key" : "value"}, {"key" : "value"}, {"key" : "value"}]
@@ -39,88 +39,90 @@ import java.util.Stack;
  *
  */
 public class JsonParser {
-	private static int i = 0;
 	public static boolean isValidJson(String input) {
-		Deque<Character> stack = new ArrayDeque<>();
-		if (i >= input.length() || input.charAt(i) != '{') {
+//		System.out.println(input);
+		if (input.length() == 0) {
+			return true;
+		}
+		
+		int i = 0;
+		int j = input.length() - 1;
+
+		if (input.charAt(i) != '{' || input.charAt(j) != '}') {
 			return false;
 		}
-		stack.addLast('{');
+		
 		i++;
-
-		while (i < input.length() && input.charAt(i) != '}') {
-			if (!validateJsonString(input)) {
+		while (i < j) {
+			// find ':' 
+			int separator = input.indexOf(":", i);
+			if (separator == -1) {
 				return false;
 			}
 
-			if (input.charAt(i++) != ':') {
+			// 1. validate key
+			if (!isValidJsonString(input.substring(i, separator))) {
 				return false;
 			}
 
-			if (!validateJsonValue(input)) {
-				return false;
+			// {"key1" : "value1", "key2" : {"key3" : "value3"}, "key4": [{"key" : "value"}, {"key" : "value"}, {"key" : "value"}]}
+			// 2. validate value - str, obj, arr
+			separator++;
+			int commaIdx = input.indexOf(",", separator);
+			if (commaIdx == -1) {
+				commaIdx = j;
 			}
-			if (input.charAt(i) == ',') {
-				i++;
+			if (input.charAt(separator) == '\"') {
+				if (!isValidJsonString(input.substring(separator, commaIdx))) {
+					return false;
+				}
+				i = commaIdx + 1;
+				
+			} else if(input.charAt(separator) == '{') {
+				if (!isValidJson(input.substring(separator, commaIdx))) {
+					return false;
+				}
+				i = commaIdx + 1;
+			} else {
+				int closing = input.lastIndexOf(']');
+				// array check
+				if (input.charAt(separator++) != '[' || closing == -1) {
+					return false;
+				}
+				String[] pairs = input.substring(separator, closing).split(",");
+				for (String pair: pairs) {
+					if (!isValidJson(pair)) {
+						return false;
+					}
+				}
+				i = closing + 1;
 			}
-		}
-		if (i >= input.length() || stack.isEmpty()) {
-			return false;
-		}
-		stack.removeLast();
-		return stack.isEmpty() ? true : false;
-	}
-
-	private static boolean validateJsonString(String s) {
-		if (s.charAt(i++) != '\"') {
-			return false;
-		}
-		while (i < s.length() && Character.isLetter(s.charAt(i))) {
-			i++;
-		}
-		if (s.charAt(i++) != '\"') {
-			return false;
 		}
 		return true;
 	}
 
-	private static boolean validateJsonValue(String s) {
-		// case1: string
-		if(s.charAt(i) == '\"') {
-			return validateJsonString(s);
+	
+	private static boolean isValidJsonString(String s) {
+		int i = 0, j = s.length() - 1;
+		if (s.charAt(i) != '\"' || s.charAt(j) != '\"') {
+			return false;
 		}
-
-		// case2: object
-		if(s.charAt(i) == '{') {
-			return isValidJson(s); // recursive call
-		}
-
-		// case3: array of object
-		if(s.charAt(i) == '[') {
+		i++;
+		while (i < j && (Character.isLetter(s.charAt(i)) || Character.isDigit(s.charAt(i)))) {
 			i++;
-
-			while(true) {
-				if(!validateJsonValue(s)) { // recursive call
-					return false;
-				}
-				if(s.charAt(i) == ',') {
-					i++;
-				}
-				else {
-					break;
-				}
-			}
-			if(s.charAt(i) == ']') {
-				return true;
-			}
 		}
-		return false;
+		return i == j;
 	}
 	
+	
 	public static void main(String[] args) {
-		String input = "{\"key\":\"value\",\"key\":{\"key\":\"value\"},\"key\":[{\"key\":\"value\"},{\"key\":\"value\"},{\"key\":\"value\"}]}";
+//		String input = "{\"key\":\"value\"}";
+//		String input = "{\"key\":{\"key\":\"value\"}}";
+//		String input = "{\"key\":[{\"key\":\"value\"},{\"key\":\"value\"},{\"key\":\"value\"}]}";
+		String input = "{\"key1\":\"value1\",\"key2\":{\"key3\":\"value3\"},\"key4\":[{\"key5\":\"value5\"},{\"key6\":\"value6\"},{\"key7\":\"value7\"}]}";
 		String input2 = "{\"key\":\"value\",\"key\":{\"key\":\"value\"},\"key\":[{\"key\":\"value\"},{\"key\":\"value\"},{\"key\":\"value\"}}";
 		String input3 = "{\"key\"\"value\",}";
+
 		System.out.println(isValidJson(input)); // valid
 		System.out.println(isValidJson(input2)); // invalid
 		System.out.println(isValidJson(input3)); // invalid
