@@ -1,6 +1,8 @@
 package practice;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Json Parsing
@@ -40,7 +42,15 @@ public class JsonParser {
 	
 	public void deserializeJson() {
 		String[] splitted = data.split(",");
-		System.out.println(Arrays.toString(splitted));
-		System.out.println(splitted.length);
+//		System.out.println(Arrays.toString(splitted));
+//		System.out.println(splitted.length);
+		
+		Map<String, Object> cache = new HashMap<>();
+		for (String pair: splitted) {
+			if (isStringPair(pair)) {
+				String[] keyValue = pair.split(":");
+				cache.put(keyValue[0], keyValue[1]);
+			}
+		}
 	}
 }
