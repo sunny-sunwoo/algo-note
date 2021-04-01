@@ -1,8 +1,11 @@
 package practice;
 
+import java.util.ArrayDeque;
 import java.util.Arrays;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 /**
  * Json Parsing
@@ -24,8 +27,9 @@ import java.util.Map;
  * "key" : "value"
  * "key" : {"key" : "value"}
  * "key" : [{"key" : "value"}, {"key" : "value"}, {"key" : "value"}]
- * {"status":"ok", "status_message":"Query was successful", "data":[{"movie_count":28778, "limit":10, "page_number":1}, {"movie_count":28778, "limit":10, "page_number":1}]}
  * 
+ * e.g. 
+ * {"key1" : "value1", "key2" : {"key3" : "value3"}, "key4": [{"key" : "value"}, {"key" : "value"}, {"key" : "value"}]}
  * "status":"ok"
  * "status_message":"Query was successful"
  * "data": List<Map> 
@@ -35,22 +39,91 @@ import java.util.Map;
  *
  */
 public class JsonParser {
-	private String data;
-	public JsonParser(String jsonData) {
-		this.data = jsonData;
-	}
-	
-	public void deserializeJson() {
-		String[] splitted = data.split(",");
-//		System.out.println(Arrays.toString(splitted));
-//		System.out.println(splitted.length);
+	private static int i = 0;
+	public static boolean isValidJson(String input) {
+		Deque<Character> stack = new ArrayDeque<>();
+		if (i >= input.length() || input.charAt(i) != '{') {
+			return false;
+		}
+		stack.addLast('{');
+		i++;
 		
-		Map<String, Object> cache = new HashMap<>();
-		for (String pair: splitted) {
-			if (isStringPair(pair)) {
-				String[] keyValue = pair.split(":");
-				cache.put(keyValue[0], keyValue[1]);
+		while (i < input.length() && input.charAt(i) != '}') {
+			if (!validateJsonString(input)) {
+				return false;
+			}
+			
+			if (input.charAt(i++) != ':') {
+				return false;
+			}
+			
+			if (!validateJsonValue(input)) {
+				return false;
+			}
+			if (input.charAt(i) == ',') {
+				i++;
 			}
 		}
+		if (i >= input.length() || stack.isEmpty()) {
+			return false;
+		}
+		stack.removeLast();
+		return stack.isEmpty() ? true : false;
 	}
+	
+	private static boolean validateJsonString(String s) {
+		if (s.charAt(i++) != '\"') {
+			return false;
+		}
+		while (i < s.length() && Character.isLetter(s.charAt(i))) {
+			i++;
+		}
+		if (s.charAt(i++) != '\"') {
+			return false;
+		}
+		return true;
+	}
+	
+	private static boolean validateJsonValue(String s) {
+		// case1: string
+		if(s.charAt(i) == '\"') {
+			return validateJsonString(s);
+		}
+		
+		// case2: object
+        if(s.charAt(i) == '{') {
+        	return isValidJson(s); // recursive call
+        }
+        
+        // case3: array of object
+        if(s.charAt(i) == '[') {
+            i++;
+
+            while(true) {
+                if(!validateJsonValue(s)) { // recursive call
+                	return false;
+                }
+                if(s.charAt(i) == ',') {
+                	i++;
+                }
+                else {
+                	break;
+                }
+            }
+            if(s.charAt(i) == ']') {
+            	return true;
+            }
+        }
+        return false;
+	}
+	
+	public static void main(String[] args) {
+		String input = "{\"key\":\"value\",\"key\":{\"key\":\"value\"},\"key\":[{\"key\":\"value\"},{\"key\":\"value\"},{\"key\":\"value\"}]}";
+		String input2 = "{\"key\":\"value\",\"key\":{\"key\":\"value\"},\"key\":[{\"key\":\"value\"},{\"key\":\"value\"},{\"key\":\"value\"}}";
+		String input3 = "{\"key\"\"value\",}";
+		System.out.println(isValidJson(input)); // valid
+		System.out.println(isValidJson(input2)); // invalid
+		System.out.println(isValidJson(input3)); // invalid
+	}
+	
 }
