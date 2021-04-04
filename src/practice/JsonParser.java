@@ -65,25 +65,24 @@ public class JsonParser {
 				return false;
 			}
 
-			// {"key1" : "value1", "key2" : {"key3" : "value3"}, "key4": [{"key" : "value"}, {"key" : "value"}, {"key" : "value"}]}
 			// 2. validate value - str, obj, arr
 			separator++;
 			int commaIdx = input.indexOf(",", separator);
 			if (commaIdx == -1) {
 				commaIdx = j;
 			}
-			if (input.charAt(separator) == '\"') {
+			if (input.charAt(separator) == '\"') { // CASE1: string
 				if (!isValidJsonString(input.substring(separator, commaIdx))) {
 					return false;
 				}
 				i = commaIdx + 1;
 				
-			} else if(input.charAt(separator) == '{') {
+			} else if(input.charAt(separator) == '{') { // CASE2: object
 				if (!isValidJson(input.substring(separator, commaIdx))) {
 					return false;
 				}
 				i = commaIdx + 1;
-			} else {
+			} else { // CASE3: arr of objects
 				int closing = input.lastIndexOf(']');
 				// array check
 				if (input.charAt(separator++) != '[' || closing == -1) {
@@ -108,6 +107,7 @@ public class JsonParser {
 			return false;
 		}
 		i++;
+
 		while (i < j && (Character.isLetter(s.charAt(i)) || Character.isDigit(s.charAt(i)))) {
 			i++;
 		}
