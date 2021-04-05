@@ -77,10 +77,9 @@ public class CompoundWordSearch {
 	
 	public List<Pair> search() {
 		List<Pair> result = new ArrayList<>();
-		TrieNode node = root;
 		
 		for (String word:  wordList) {
-			search(node, result, new ArrayList<>(), 0, 0, word);
+			search(root, result, new ArrayList<>(), 0, 0, word);
 		}
 		return result;
 	}
@@ -98,16 +97,15 @@ public class CompoundWordSearch {
 
 		char curr = word.charAt(to);
 		TrieNode nextNode = node;
+		List<String> currPath = new ArrayList<>(path);
 
-		// if node is last ? add to path
 		if (node.isLast) {
-			path.add(word.substring(from, to));
+			currPath.add(word.substring(from, to));
 			nextNode = root;
 			for (Map.Entry<Character, TrieNode> entry : nextNode.children.entrySet()) {
-				search(entry.getValue(), result, new ArrayList<>(path), to, to + 1, word);
+				search(entry.getValue(), result, new ArrayList<>(currPath), to, to + 1, word);
 			}
-			
-		}	
+		}
 
 		nextNode = node;
 		if (node.children.containsKey(curr)) {
