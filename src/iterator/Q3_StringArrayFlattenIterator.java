@@ -50,7 +50,8 @@ public class Q3_StringArrayFlattenIterator implements Iterator<String> {
 		}
 
 		Q3_StringArrayFlattenIterator flattenIterator = new Q3_StringArrayFlattenIterator(input);
-		for (int i = 0; i < inputList.size(); i++) {
+		int total = inputList.stream().mapToInt(x -> x.size()).sum();
+		for (int i = 0; i < total; i++) {
 			System.out.println(flattenIterator.next());
 		}
 	}
