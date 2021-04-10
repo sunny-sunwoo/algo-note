@@ -37,7 +37,6 @@ import java.util.List;
 public class LC1229_MeetingScheduler {
 	public static List<Integer> minAvailableDuration(int[][] slots1, int[][] slots2, int duration) {
         // 1) find overlapped intervals
-        List<int[]> overlapped = new ArrayList<>();
         int i = 0, j = 0;
         
         Arrays.sort(slots1, (a,b) -> a[0] - b[0]);

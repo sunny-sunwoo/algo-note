@@ -9,10 +9,10 @@ import java.util.stream.IntStream;
  * 
 	Input: 
 	nums = [1,3,-1,-3,5,3,6,7], k = 3
-	                      ^
+	               ^
 	Output: [3,3,5,5,6,7]
 	
-	queue = []
+	queue = [ 4]
 	 => peek first: should be max value
 	 => queue will keep possible max values only
 	 
