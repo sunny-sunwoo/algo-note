@@ -2,7 +2,7 @@ package binarySearch;
 
 import java.util.Arrays;
 
-public class Type1_1SearchInFloatArray {
+public class T1Q1_SearchInFloatArray {
 	public static int binarySearchInFloatArray(float[] arr, int t) {
 		int pos = Arrays.binarySearch(arr, (float) t);
 		if (pos < 0) {

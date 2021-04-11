@@ -6,6 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 
+ * @author sunnypark
+ *
+ */
 public class Memo {
 
 	public static void test(int pos) {
