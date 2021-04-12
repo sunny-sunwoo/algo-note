@@ -44,14 +44,15 @@ public class Q16_MaxSizeRectFinder {
 		int[] heights = new int[input.length + 2];
 		System.arraycopy(input, 0, heights, 1, input.length);
 		Deque<Integer> stack = new ArrayDeque<>();
+		stack.addLast(0);
 		int maxArea = 0;
-		for (int i = 0; i < heights.length; i++) {
+
+		for (int i = 1; i < heights.length; i++) {
 			int curr = heights[i];
-			while (!stack.isEmpty() && stack.peekLast() > curr) {
+			while (!stack.isEmpty() && heights[stack.peekLast()] > curr) {
 				int tallestIdx = stack.removeLast();
-				int width = i - stack.peekLast() - 1;
 				int height = heights[tallestIdx];
-				System.out.println(width + "  " + height);
+				int width = i - stack.peekLast() - 1;
 				maxArea = Math.max(maxArea, width * height);
 			}
 			stack.addLast(i);
