@@ -66,7 +66,6 @@ public class Q42_StringCompressor {
 				}
 			}
 		}
-
 		return dp[0][sLen - 1];
 	}
 	

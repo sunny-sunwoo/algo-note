@@ -16,7 +16,7 @@ import java.util.List;
  * @author sunnypark
  * 
  */
-public class Q7_ArrayHooper {
+public class Q07_ArrayHooper {
 	public static List<Integer> findMinJumpPath(int[] arr) {
 		List<Integer> path = new ArrayList<>();
 		int currMax = 0; // reachable index in current jump
