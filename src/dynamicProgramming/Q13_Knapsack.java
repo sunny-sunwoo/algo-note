@@ -64,8 +64,6 @@ public class Q13_Knapsack {
         }
     }
     
-    
-    
     public static void main(String[] args) {
         List<Item> input = new ArrayList<>();
 //        input.addAll(Arrays.asList(new Item(10, 7), new Item(3, 9), new Item(6, 5), new Item(8, 2)));
