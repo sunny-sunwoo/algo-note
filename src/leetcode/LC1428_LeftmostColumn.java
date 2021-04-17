@@ -11,6 +11,7 @@ public class LC1428_LeftmostColumn {
         int i = 0; // ++
         int j = col - 1; // --
         int res = -1;
+
         while (i < row && j >= 0) {
             int curr = binaryMatrix.get(i,j);
             if (curr == 1) {
