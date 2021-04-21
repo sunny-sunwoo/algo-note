@@ -34,6 +34,13 @@ import java.util.Random;
 	 - find random idx from 0 ~ size
 	 - rt the value @ random idx
 	 
+	 101, 110, 111, 000
+	   ^
+	 001
+	 111
+	 100
+	  
+	 n * k
  * @author sunnypark
  *
  */
