@@ -1,5 +1,8 @@
 package leetcode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LC77_Combinations {
 	public List<List<Integer>> combine(int n, int k) {
         List<List<Integer>> result = new ArrayList<>();

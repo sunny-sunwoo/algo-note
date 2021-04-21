@@ -42,8 +42,8 @@ public class LC785_GraphBipartition {
             if (visited[i]) {
                 continue;
             }
-            
             visited[i] = true;
+            
             if (!dfs(visited, color, i, graph)) {
                 return false;
             }
