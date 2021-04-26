@@ -12,6 +12,37 @@ package leetcode;
  *
  */
 public class LC543_TreeDiameter {
+	// SOLUTION 1
+	public int diameterOfBinaryTree_linear(TreeNode root) {
+        return getDiameter(root).diameter;
+    }
+    
+    private Pair getDiameter(TreeNode node) {
+        if (node == null) {
+            return new Pair(0,0);
+        }
+        
+        Pair left = getDiameter(node.left);
+        Pair right = getDiameter(node.right);
+        
+        int bestDiameter = Math.max(left.diameter, right.diameter);
+        bestDiameter = Math.max(bestDiameter, left.height + right.height);
+        
+        int height = Math.max(left.height, right.height) + 1;
+        return new Pair(bestDiameter, height);
+    }
+    
+    private static class Pair {
+        int diameter;
+        int height;
+        
+        public Pair(int diameter, int height) {
+            this.diameter = diameter;
+            this.height = height;
+        }
+    }
+    
+    // SOLUTION 2
 	public int diameterOfBinaryTree(TreeNode root) {
         if (root == null) {
             return 0;
