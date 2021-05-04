@@ -1,4 +1,4 @@
-package grokking.interval;
+package interval;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -16,7 +16,8 @@ import java.util.PriorityQueue;
  * ref: grokking the coding interview
  
  [approach1]
-  init and build list of intervals 
+  init and build list of merged intervals 
+  determine free time
   
  [approach2]
   use k pointers => O(NlogK)
@@ -37,16 +38,18 @@ import java.util.PriorityQueue;
 	pq 
 	[1,4] [5,12]
 
- 1) init pq w/ first intervals
+ 1) init size-k pq w/ first intervals
  
  2) while pq is not empty
     => poll
-    => has next ? add to the pq  
+    => has next ? add to the pq
     => if prev and curr overlapped? update prev 
        else? add prev to result, prev = curr
        
- 3) post-process
+ 3) post-process: merged working hrs -> free time list
  
+ Time: O(NlogK)
+ Space: O(K)
  * @author sunnypark
  *
  */
@@ -55,7 +58,6 @@ public class EmployeeFreeTime {
 		PriorityQueue<Node> pq = new PriorityQueue<>();
 		init(pq, workingHours);
 		List<Interval> mergedWorkingHours = new ArrayList<>();		
-		//System.out.println(pq);
 
 		Node prev = pq.peek();
 		
@@ -74,8 +76,7 @@ public class EmployeeFreeTime {
 			}
 		}
 		
-		mergedWorkingHours.add(prev.getInterval());
-		//System.out.println(mergedWorkingHours);
+		mergedWorkingHours.add(prev.getInterval()); // deal w/ last one
 		return postProcess(mergedWorkingHours);
 	}
 	

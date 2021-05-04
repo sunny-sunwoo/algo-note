@@ -1,4 +1,4 @@
-package grokking.interval;
+package interval;
 
 import java.util.List;
 import java.util.PriorityQueue;
@@ -39,10 +39,12 @@ import java.util.PriorityQueue;
  * 
  * maxLoad = max (maxLoad, currLoad)
  * 
+ * Time: O(NlogN)
+ * Space: O(N)
  * */
 public class MaxCPULoad {
 	public static int maxCpuLoad(List<Job> jobs) {
-		PriorityQueue<Job> pq = new PriorityQueue<>((a,b) -> a.end - b.end);
+		PriorityQueue<Job> pq = new PriorityQueue<>((a,b) -> Integer.compare(a.end, b.end));
 		int maxLoad = 0;
 		int currLoad = 0;
 		for (Job job : jobs) {

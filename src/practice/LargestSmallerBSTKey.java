@@ -1,30 +1,47 @@
 package practice;
 
 public class LargestSmallerBSTKey {
-	//  inserts a new node with the given number in the
-	//  correct place in the tree
-
 	static class BinarySearchTree {
 		Node root;
-		int candidate;
-
+//		int candidate;
+//
+//		public int findLargestSmallerKey(int num) {
+//			candidate = -1;
+//			findLargestSmallerKey(root, num);
+//			return candidate;
+//		}
+//
+//		private void findLargestSmallerKey(Node node, int num) {
+//			if (node == null) {
+//				return;
+//			}
+//
+//			if (node.key >= num) { // no candidate condition
+//				findLargestSmallerKey(node.left, num);
+//			} else { // keep candidate only when curr val < num
+//				candidate = node.key;
+//				findLargestSmallerKey(node.right, num);
+//			}
+//		}
+		
 		public int findLargestSmallerKey(int num) {
-			candidate = -1;
-			findLargestSmallerKey(root, num);
-			return candidate;
+			return findLargestSmallerKey(root, num, Integer.MIN_VALUE);
 		}
-
-		private void findLargestSmallerKey(Node node, int num) {
+		
+		private int findLargestSmallerKey(Node node, int target, int maxVal) {
 			if (node == null) {
-				return;
+				return maxVal == Integer.MIN_VALUE ? -1 : maxVal;
+			}
+			
+			int ret = -1;
+			if (node.key >= target) { // move to left
+				ret = findLargestSmallerKey(node.left, target, maxVal);
+			} else { // keep candidate, and move down to right
+				maxVal = Math.max(maxVal, node.key);
+				ret = findLargestSmallerKey(node.right, target, maxVal);
 			}
 
-			if (node.key >= num) {
-				findLargestSmallerKey(node.left, num);
-			} else { // keep candidate only when curr val < num
-				candidate = node.key;
-				findLargestSmallerKey(node.right, num);
-			}
+			return ret;
 		}
 
 		void insert(int key) {
@@ -89,10 +106,10 @@ public class LargestSmallerBSTKey {
 		bst.insert(14);
 
 		int result1 = bst.findLargestSmallerKey(26);
-		System.out.println("Largest smaller number is " + result1);
+		System.out.println("Largest smaller number is " + result1); // 25
 
 		int result2 = bst.findLargestSmallerKey(20);
-		System.out.println("Largest smaller number is " + result2); // 11
+		System.out.println("Largest smaller number is " + result2); // 14
 
 		int result3 = bst.findLargestSmallerKey(0);
 		System.out.println("Largest smaller number is " + result3); // -1
