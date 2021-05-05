@@ -1,4 +1,4 @@
-package grokking.slidingWindow;
+package slidingWindow;
 
 import java.util.ArrayList;
 import java.util.Arrays;

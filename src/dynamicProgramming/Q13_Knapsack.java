@@ -36,8 +36,8 @@ public class Q13_Knapsack {
 			int currValue = currItem.value;
 			
 			for (int j = 1; j <= restriction; j++) {
-				int pick = dp[i - 1][j];
-				int notPick = currWeight <= j ? dp[i - 1][j - currWeight] + currValue : 0;
+				int notPick = dp[i - 1][j];
+				int pick = currWeight <= j ? dp[i - 1][j - currWeight] + currValue : 0;
 				dp[i][j] = Math.max(pick, notPick);
 			}
 		}

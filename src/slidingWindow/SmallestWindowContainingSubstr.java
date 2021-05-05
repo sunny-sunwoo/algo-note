@@ -1,4 +1,4 @@
-package grokking.slidingWindow;
+package slidingWindow;
 
 import java.util.HashMap;
 import java.util.Map;
