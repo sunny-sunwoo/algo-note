@@ -42,7 +42,6 @@ public class Q4_3_SerializeDeserializeTrie {
 		int closeIdx = s.lastIndexOf("}");
 		
 		// base case?
-		
 		String rootVal = s.substring(0, openIdx);
 		TrieNode root = new TrieNode(Integer.valueOf(rootVal));
 		
@@ -57,6 +56,8 @@ public class Q4_3_SerializeDeserializeTrie {
 		return root;
 	}
 	
+	// root{   s{t{l},s,r},     b{a}    }
+	// root {s, b} <- need to handle this case
 	private static List<String> parseInside(String input) {
 		List<String> res = new ArrayList<>();
 		int tracker = 0;

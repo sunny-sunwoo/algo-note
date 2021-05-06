@@ -10,7 +10,7 @@ import java.util.Arrays;
  *   2. sort second half
  *   3. merge the sorted 2 halves
  *  
- * time complexity: O(NLogN)
+ * time complexity: O(NlogN)
  * 
  * @author sunnypark
  * 

@@ -1,5 +1,16 @@
 package sorting;
 
+/**
+ * Quick Select
+ * 
+ * [4,3,1,2] [5] [7,10,6,12]
+ * do partitioning & keep selecting range w/target only 
+ * find 4 => drop the right subarr bc target is on the left side
+ * time complexity: n + n/2 + n/4 + ... => 2n
+ * 
+ * @author sunnypark
+ *
+ */
 public class QuickSelect {
 	public static int quickSelect(int[] arr, int pos) {
 		int len = arr.length;

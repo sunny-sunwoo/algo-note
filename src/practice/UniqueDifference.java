@@ -80,7 +80,7 @@ public class UniqueDifference {
 				Set<Integer> visited = top.visited;
 				List<Integer> last = currPath.get(currPath.size() - 1);
 				
-				Set<Integer> diffs = getNextDiffs(last, visited, a);
+				Set<Integer> diffs = getNextDiffs(last, visited);
 				if (diffs.size() == 0) {
 					result.add(new ArrayList<>(currPath));
 					continue;
@@ -103,7 +103,7 @@ public class UniqueDifference {
 		return result;
 	}
 	
-	private static Set<Integer> getNextDiffs(List<Integer> list, Set<Integer> visited, int bound) {
+	private static Set<Integer> getNextDiffs(List<Integer> list, Set<Integer> visited) {
 		Set<Integer> diffs = new HashSet<>();
 		
 		for (int i = 0; i < list.size(); i++) {
