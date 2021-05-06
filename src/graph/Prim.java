@@ -1,4 +1,4 @@
-package path;
+package graph;
 
 /**
  * Prim Algorithm

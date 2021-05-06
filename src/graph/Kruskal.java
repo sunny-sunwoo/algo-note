@@ -1,4 +1,4 @@
-package path;
+package graph;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.PriorityQueue;
@@ -37,7 +37,7 @@ import java.util.PriorityQueue;
 public class Kruskal {
 	public Deque<Edge> findMinimumSpanningTree(Graph g) {
 		Deque<Edge> mst = new ArrayDeque<>();
-		DisjointSet uf = new DisjointSet(g.size() + 1);
+		UnionFinder uf = new UnionFinder(g.size() + 1);
 		PriorityQueue<Edge> minHeap = populate(g);
 		
 		while (!minHeap.isEmpty()) {

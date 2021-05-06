@@ -1,4 +1,4 @@
-package leetcode;
+package graph;
 
 import java.util.PriorityQueue;
 
@@ -32,6 +32,15 @@ import java.util.PriorityQueue;
 	 2) union x,y
 	  // prunning: check if x,y merged already
 	    uf[x] = y
+	    
+[time complexity]
+   Total time complexity: O(ElogE+E+V) 
+    - sort:O(ElogE) 
+	- find operations:O(1)*2E = O(E) b/c find operation for weighted union-find with path compression should be average O(1)
+	- initialize union-find:O(V)
+   
+   Total space complexity:O(V+E)
+    - O(E):List<int[]> edges    O(V):UnionFind
  * @author sunnypark
  *
  */

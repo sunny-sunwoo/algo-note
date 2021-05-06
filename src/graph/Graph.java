@@ -1,4 +1,4 @@
-package path;
+package graph;
 
 import java.util.List;
 

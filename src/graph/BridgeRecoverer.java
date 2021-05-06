@@ -1,13 +1,11 @@
-package path.disjointSet;
-
-import path.DisjointSet;
+package graph;
 
 public class BridgeRecoverer {
 
-	DisjointSet unionFinder;
+	UnionFinder unionFinder;
 
 	public boolean isRecovered(Bridge... bridges) {
-		unionFinder = new DisjointSet(bridges.length);
+		unionFinder = new UnionFinder(bridges.length);
 		Bridge firstBrdg = bridges[0];
 		for (int i = 1; i < bridges.length; i++) {
 			if (!isConnected(firstBrdg, bridges[i])) {

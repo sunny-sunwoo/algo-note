@@ -1,4 +1,4 @@
-package path;
+package graph;
 
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -29,11 +29,11 @@ import java.util.stream.IntStream;
  * @author sunnypark
  *
  */
-public class DisjointSet {
+public class UnionFinder {
 	private final int[] parents;
 	private final int[] ranks;
 	
-	public DisjointSet(int numOfNodes) {
+	public UnionFinder(int numOfNodes) {
 		parents = new int[numOfNodes];
 		ranks = new int[numOfNodes];
 		
@@ -65,7 +65,7 @@ public class DisjointSet {
 		return parents[vertex];
 	}
 	
-	public DisjointSet union(int u, int v) {
+	public UnionFinder union(int u, int v) {
 		int uParent = find(u);
 		int vParent = find(v);
 		
